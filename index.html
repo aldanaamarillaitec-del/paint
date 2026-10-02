@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mini Paint</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="paint-app">
+
+    <!-- =========================================
+         BARRA SUPERIOR
+    ========================================== -->
+
+    <header class="topbar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 3C7 3 3 7 3 12s4 9 9 9h1.5a2 2 0 0 0 0-4H12a5 5 0 1 1 0-10h4a5 5 0 0 1 5 5v1"/>
+                    <circle cx="8" cy="11" r="1"/>
+                    <circle cx="12" cy="8" r="1"/>
+                    <circle cx="16" cy="9" r="1"/>
+                </svg>
+
+            </div>
+
+            <span>Mini Paint</span>
+
+        </div>
+
+
+        <div class="file-actions">
+
+            <button
+                id="undo"
+                class="icon-button"
+                title="Deshacer">
+
+                <svg viewBox="0 0 24 24">
+                    <path d="M9 14 4 9l5-5"/>
+                    <path d="M4 9h10a6 6 0 0 1 6 6v1"/>
+                </svg>
+
+            </button>
+
+
+            <button
+                id="redo"
+                class="icon-button"
+                title="Rehacer">
+
+                <svg viewBox="0 0 24 24">
+                    <path d="m15 14 5-5-5-5"/>
+                    <path d="M20 9H10a6 6 0 0 0-6 6v1"/>
+                </svg>
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================================
+         BARRA DE HERRAMIENTAS
+    ========================================== -->
+
+    <div class="toolbar">
+
+
+        <!-- HERRAMIENTAS -->
+
+        <div class="tool-section tools-section">
+
+            <button
+                class="tool active"
+                data-tool="brush"
+                title="Pincel">
+
+                <svg viewBox="0 0 24 24">
+                    <path d="m14 6 4 4"/>
+                    <path d="m5 19 8-8 4 4-8 8H5v-4Z"/>
+                    <path d="m15 5 2-2 4 4-2 2"/>
+                </svg>
+
+                <span>Pincel</span>
+
+            </button>
+
+
+            <button
+                class="tool"
+                data-tool="eraser"
+                title="Goma">
+
+                <svg viewBox="0 0 24 24">
+                    <path d="m3 16 9-9 7 7-6 6H7l-4-4Z"/>
+                    <path d="m13 19 6-6"/>
+                </svg>
+
+                <span>Goma</span>
+
+            </button>
+
+
+            <button
+                class="tool"
+                data-tool="line"
+                title="Línea">
+
+                <svg viewBox="0 0 24 24">
+                    <path d="M5 19 19 5"/>
+                </svg>
+
+                <span>Línea</span>
+
+            </button>
+
+
+            <button
+                class="tool"
+                data-tool="rectangle"
+                title="Rectángulo">
+
+                <svg viewBox="0 0 24 24">
+                    <rect
+                        x="4"
+                        y="5"
+                        width="16"
+                        height="14"
+                        rx="1"/>
+                </svg>
+
+                <span>Rectángulo</span>
+
+            </button>
+
+
+            <button
+                class="tool"
+                data-tool="circle"
+                title="Círculo">
+
+                <svg viewBox="0 0 24 24">
+                    <circle
+                        cx="12"
+                        cy="12"
+                        r="7"/>
+                </svg>
+
+                <span>Círculo</span>
+
+            </button>
+
+
+            <button
+                class="tool"
+                data-tool="fill"
+                title="Relleno">
+
+                <svg viewBox="0 0 24 24">
+                    <path d="m7 3 10 10-6 6-8-8 4-4Z"/>
+                    <path d="M14 15c0 3 2 5 4 5s3-2 3-4c0-2-2-3-4-5"/>
+                </svg>
+
+                <span>Relleno</span>
+
+            </button>
+
+
+            <button
+                class="tool"
+                data-tool="text"
+                title="Texto">
+
+                <svg viewBox="0 0 24 24">
+                    <path d="M5 5h14"/>
+                    <path d="M12 5v14"/>
+                    <path d="M8 19h8"/>
+                </svg>
+
+                <span>Texto</span>
+
+            </button>
+
+        </div>
+
+
+        <!-- COLOR -->
+
+        <div class="tool-section color-section">
+
+            <span class="section-title">
+                Color
+            </span>
+
+
+            <label class="color-picker">
+
+                <input
+                    type="color"
+                    id="color"
+                    value="#000000">
+
+                <span id="colorPreview"></span>
+
+            </label>
+
+
+            <div class="preset-colors">
+
+                <button
+                    data-color="#000000"
+                    style="background:#000000">
+                </button>
+
+                <button
+                    data-color="#ffffff"
+                    style="background:#ffffff">
+                </button>
+
+                <button
+                    data-color="#ff0000"
+                    style="background:#ff0000">
+                </button>
+
+                <button
+                    data-color="#ff9800"
+                    style="background:#ff9800">
+                </button>
+
+                <button
+                    data-color="#ffeb3b"
+                    style="background:#ffeb3b">
+                </button>
+
+                <button
+                    data-color="#4caf50"
+                    style="background:#4caf50">
+                </button>
+
+                <button
+                    data-color="#2196f3"
+                    style="background:#2196f3">
+                </button>
+
+                <button
+                    data-color="#9c27b0"
+                    style="background:#9c27b0">
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- GROSOR -->
+
+        <div class="tool-section size-section">
+
+            <span class="section-title">
+                Grosor
+            </span>
+
+            <input
+                type="range"
+                id="size"
+                min="1"
+                max="50"
+                value="5">
+
+            <span id="sizeValue">
+                5 px
+            </span>
+
+        </div>
+
+
+        <!-- RELLENO -->
+
+        <div class="tool-section fill-section">
+
+            <span class="section-title">
+                Figuras
+            </span>
+
+            <label class="fill-option">
+
+                <input
+                    type="checkbox"
+                    id="fillShape">
+
+                <span>
+                    Rellenar
+                </span>
+
+            </label>
+
+        </div>
+
+
+        <!-- ACCIONES -->
+
+        <div class="tool-section action-section">
+
+            <button
+                id="clear"
+                class="action-button danger"
+                title="Limpiar">
+
+                <svg viewBox="0 0 24 24">
+                    <path d="M4 7h16"/>
+                    <path d="M10 11v6"/>
+                    <path d="M14 11v6"/>
+                    <path d="M6 7l1 14h10l1-14"/>
+                    <path d="M9 7V4h6v3"/>
+                </svg>
+
+                <span>
+                    Limpiar
+                </span>
+
+            </button>
+
+
+            <button
+                id="save"
+                class="action-button save"
+                title="Guardar">
+
+                <svg viewBox="0 0 24 24">
+                    <path d="M5 4h11l3 3v13H5V4Z"/>
+                    <path d="M8 4v6h8V4"/>
+                    <path d="M8 17h8"/>
+                </svg>
+
+                <span>
+                    Guardar
+                </span>
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         LIENZO
+    ========================================== -->
+
+    <main class="workspace">
+
+        <div class="canvas-wrapper">
+
+            <canvas
+                id="canvas"
+                width="1200"
+                height="700">
+            </canvas>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================================
+         ESTADO
+    ========================================== -->
+
+    <footer class="statusbar">
+
+        <span id="status">
+            Herramienta: Pincel
+        </span>
+
+        <span>
+            1200 × 700 px
+        </span>
+
+    </footer>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

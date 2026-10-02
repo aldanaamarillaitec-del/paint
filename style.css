@@ -1,0 +1,787 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+:root {
+
+    --primary: #2563eb;
+
+    --primary-light: #eff6ff;
+
+    --border: #d9dee7;
+
+    --background: #eef1f5;
+
+    --text: #1f2937;
+
+    --muted: #6b7280;
+}
+
+
+body {
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    background:
+        var(--background);
+
+    color:
+        var(--text);
+
+    min-height: 100vh;
+
+}
+
+
+button {
+
+    font-family: inherit;
+
+}
+
+
+/* =========================================
+   APLICACIÓN
+========================================= */
+
+.paint-app {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+/* =========================================
+   BARRA SUPERIOR
+========================================= */
+
+.topbar {
+
+    height: 64px;
+
+    background: white;
+
+    border-bottom:
+        1px solid var(--border);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding:
+        0 22px;
+
+    box-shadow:
+        0 1px 4px rgba(0,0,0,.06);
+
+}
+
+
+.brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+}
+
+
+.brand-icon {
+
+    width: 38px;
+
+    height: 38px;
+
+    display: grid;
+
+    place-items: center;
+
+    color: var(--primary);
+
+}
+
+
+.brand-icon svg {
+
+    width: 30px;
+
+    height: 30px;
+
+}
+
+
+.file-actions {
+
+    display: flex;
+
+    gap: 5px;
+
+}
+
+
+.icon-button {
+
+    width: 40px;
+
+    height: 40px;
+
+    display: grid;
+
+    place-items: center;
+
+    border: 0;
+
+    border-radius: 7px;
+
+    background: transparent;
+
+    color: #555;
+
+    cursor: pointer;
+
+}
+
+
+.icon-button:hover {
+
+    background: #f0f2f5;
+
+    color: var(--primary);
+
+}
+
+
+/* =========================================
+   SVG
+========================================= */
+
+svg {
+
+    width: 20px;
+
+    height: 20px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.8;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+
+}
+
+
+/* =========================================
+   TOOLBAR
+========================================= */
+
+.toolbar {
+
+    min-height: 105px;
+
+    display: flex;
+
+    align-items: stretch;
+
+    background: white;
+
+    border-bottom:
+        1px solid var(--border);
+
+    overflow-x: auto;
+
+}
+
+
+.tool-section {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding:
+        12px 16px;
+
+    border-right:
+        1px solid var(--border);
+
+}
+
+
+.tools-section {
+
+    gap: 4px;
+
+}
+
+
+.section-title {
+
+    position: absolute;
+
+    transform:
+        translateY(-35px);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    color: var(--muted);
+
+}
+
+
+/* =========================================
+   HERRAMIENTAS
+========================================= */
+
+.tool {
+
+    min-width: 68px;
+
+    height: 72px;
+
+    border:
+        1px solid transparent;
+
+    border-radius: 8px;
+
+    background: transparent;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 6px;
+
+    color: #4b5563;
+
+    cursor: pointer;
+
+    transition: .15s;
+
+}
+
+
+.tool svg {
+
+    width: 24px;
+
+    height: 24px;
+
+}
+
+
+.tool span {
+
+    font-size: 11px;
+
+}
+
+
+.tool:hover {
+
+    background: #f3f4f6;
+
+}
+
+
+.tool.active {
+
+    background:
+        var(--primary-light);
+
+    border-color:
+        #bfdbfe;
+
+    color:
+        var(--primary);
+
+}
+
+
+/* =========================================
+   COLOR
+========================================= */
+
+.color-section {
+
+    min-width: 200px;
+
+    position: relative;
+
+}
+
+
+.color-picker {
+
+    cursor: pointer;
+
+}
+
+
+.color-picker input {
+
+    position: absolute;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+}
+
+
+#colorPreview {
+
+    display: block;
+
+    width: 42px;
+
+    height: 42px;
+
+    border-radius: 7px;
+
+    background: #000;
+
+    border:
+        2px solid #d1d5db;
+
+    cursor: pointer;
+
+}
+
+
+.preset-colors {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 24px);
+
+    gap: 5px;
+
+}
+
+
+.preset-colors button {
+
+    width: 24px;
+
+    height: 24px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid #ccc;
+
+    cursor: pointer;
+
+}
+
+
+.preset-colors button:hover {
+
+    transform: scale(1.15);
+
+}
+
+
+/* =========================================
+   GROSOR
+========================================= */
+
+.size-section {
+
+    min-width: 180px;
+
+    position: relative;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+}
+
+
+.size-section input {
+
+    width: 120px;
+
+    accent-color:
+        var(--primary);
+
+}
+
+
+#sizeValue {
+
+    font-size: 12px;
+
+    color: var(--muted);
+
+}
+
+
+/* =========================================
+   RELLENO
+========================================= */
+
+.fill-section {
+
+    min-width: 120px;
+
+    position: relative;
+
+    justify-content: center;
+
+}
+
+
+.fill-option {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+}
+
+
+.fill-option input {
+
+    width: 18px;
+
+    height: 18px;
+
+    accent-color:
+        var(--primary);
+
+    cursor: pointer;
+
+}
+
+
+/* =========================================
+   ACCIONES
+========================================= */
+
+.action-section {
+
+    margin-left: auto;
+
+}
+
+
+.action-button {
+
+    height: 52px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding:
+        0 14px;
+
+    border-radius: 7px;
+
+    border:
+        1px solid var(--border);
+
+    background: white;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+}
+
+
+.action-button:hover {
+
+    background: #f5f6f8;
+
+}
+
+
+.action-button.danger:hover {
+
+    color: #dc2626;
+
+    border-color:
+        #fecaca;
+
+    background:
+        #fef2f2;
+
+}
+
+
+.action-button.save {
+
+    color: white;
+
+    background: #16a34a;
+
+    border-color: #16a34a;
+
+}
+
+
+.action-button.save:hover {
+
+    background: #15803d;
+
+}
+
+
+/* =========================================
+   LIENZO
+========================================= */
+
+.workspace {
+
+    flex: 1;
+
+    padding: 25px;
+
+    overflow: auto;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-start;
+
+    background-color: #e5e7eb;
+
+    background-image:
+        linear-gradient(
+            45deg,
+            #d8dce1 25%,
+            transparent 25%
+        ),
+        linear-gradient(
+            -45deg,
+            #d8dce1 25%,
+            transparent 25%
+        ),
+        linear-gradient(
+            45deg,
+            transparent 75%,
+            #d8dce1 75%
+        ),
+        linear-gradient(
+            -45deg,
+            transparent 75%,
+            #d8dce1 75%
+        );
+
+    background-size: 20px 20px;
+
+    background-position:
+        0 0,
+        0 10px,
+        10px -10px,
+        -10px 0;
+
+}
+
+
+.canvas-wrapper {
+
+    background: white;
+
+    box-shadow:
+        0 5px 25px
+        rgba(0,0,0,.15);
+
+    line-height: 0;
+
+}
+
+
+canvas {
+
+    display: block;
+
+    background: white;
+
+    cursor: crosshair;
+
+    touch-action: none;
+
+}
+
+
+/* =========================================
+   BARRA DE ESTADO
+========================================= */
+
+.statusbar {
+
+    height: 32px;
+
+    background: white;
+
+    border-top:
+        1px solid var(--border);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding:
+        0 15px;
+
+    font-size: 12px;
+
+    color: var(--muted);
+
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+
+    .toolbar {
+
+        flex-wrap: wrap;
+
+        padding: 8px;
+
+    }
+
+
+    .tool-section {
+
+        border-right: none;
+
+        border-bottom:
+            1px solid var(--border);
+
+    }
+
+
+    .action-section {
+
+        margin-left: 0;
+
+    }
+
+
+    .workspace {
+
+        padding: 10px;
+
+    }
+
+
+    canvas {
+
+        width: 100%;
+
+        height: auto;
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .topbar {
+
+        height: 55px;
+
+        padding:
+            0 12px;
+
+    }
+
+
+    .brand {
+
+        font-size: 17px;
+
+    }
+
+
+    .tool {
+
+        min-width: 58px;
+
+        height: 50px;
+
+    }
+
+
+    .tool span {
+
+        display: none;
+
+    }
+
+
+    .toolbar {
+
+        gap: 4px;
+
+    }
+
+
+    .tool-section {
+
+        padding: 8px;
+
+    }
+
+
+    .section-title {
+
+        display: none;
+
+    }
+
+}
